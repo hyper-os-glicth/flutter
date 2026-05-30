@@ -373,8 +373,8 @@ body {
     margin: 0 auto;
     padding: 0 20px;
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: 4rem;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 3rem;
     align-items: center;
 }
 
@@ -441,12 +441,33 @@ body {
 }
 
 .hero-visual {
-    display: none; /* cube removed — ribbon replaces it below hero */
-}
-    justify-content: absolute;
+    display: flex;
     align-items: center;
-    gap: 5rem;
-    margin-top: 2rem;
+    justify-content: center;
+}
+
+.hero-graphic {
+    width: 100%;
+    max-width: 520px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow:
+        0 0 0 1px rgba(103,232,249,0.15),
+        0 24px 60px rgba(0,0,0,0.5),
+        0 0 80px rgba(103,232,249,0.08);
+    animation: graphicFloat 6s ease-in-out infinite;
+    will-change: transform;
+}
+
+.hero-graphic-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+@keyframes graphicFloat {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-10px); }
 }
 
 .cube-container {
@@ -3905,6 +3926,17 @@ section {
     opacity: 1;
 }
 
+/* MOUNTAIN SCENE BACKGROUND — sits behind particles */
+.mountain-bg {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.38;
+    mix-blend-mode: screen;
+}
+
 /* Mouse trail removed */
 
 /* 3. PAGE TRANSITION OVERLAY */
@@ -4316,7 +4348,7 @@ section + section::before {
 
 /* ============================================================
    HERO RIBBON BANNER
-   Full page width, flat rectangle, scrolling "Fluxinity" text
+   Full page width, flat rectangle, scrolling "Flutter" text
    Sits directly below the navbar, above the hero section
    ============================================================ */
 .hero-ribbon {
@@ -4351,7 +4383,7 @@ section + section::before {
     position: relative;
 }
 
-/* Alternate "Fluxinity" cyan, "Web" white */
+/* Alternate "Flutter" cyan, "Web" white */
 .ribbon-track span:nth-child(odd) {
     color: #67e8f9;
     text-shadow: 0 0 18px rgba(103,232,249,0.45);
