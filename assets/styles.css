@@ -353,10 +353,9 @@ body {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    padding: 100px 0 50px;
+    padding: 24px 0 50px;
     background: transparent;
     position: relative;
-    /* isolate hero stacking context so scroll compositor doesn't repaint it */
     isolation: isolate;
 }
 
@@ -442,8 +441,8 @@ body {
 }
 
 .hero-visual {
-    display: flex;
-    flex-direction: column;
+    display: none; /* cube removed — ribbon replaces it below hero */
+}
     justify-content: absolute;
     align-items: center;
     gap: 5rem;
@@ -1042,6 +1041,7 @@ body.admin-mode .media-showcase[data-owner-editable="true"] .media-showcase-item
     margin-bottom: 1rem;
     color: var(--text-primary);
     line-height: 1.3;
+    text-align: left;
 }
 
 .service-card p {
@@ -1108,6 +1108,7 @@ body.admin-mode .media-showcase[data-owner-editable="true"] .media-showcase-item
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 2rem;
     margin-bottom: 3rem;
+    justify-items: center;
 }
 
 .stat-box {
@@ -1116,6 +1117,11 @@ body.admin-mode .media-showcase[data-owner-editable="true"] .media-showcase-item
     border: 1px solid var(--card-border);
     border-radius: 12px;
     padding: 2rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .stat-box .stat-number {
@@ -1124,11 +1130,15 @@ body.admin-mode .media-showcase[data-owner-editable="true"] .media-showcase-item
     font-weight: 700;
     color: var(--primary-color);
     margin-bottom: 0.5rem;
+    text-align: center;
+    width: 100%;
 }
 
 .stat-box .stat-label {
     color: var(--text-secondary);
     font-weight: 500;
+    text-align: center;
+    width: 100%;
 }
 
 .client-logos {
@@ -1186,11 +1196,13 @@ body.admin-mode .media-showcase[data-owner-editable="true"] .media-showcase-item
     font-weight: 700;
     color: var(--primary-color);
     margin-bottom: 0.5rem;
+    text-align: center;
 }
 
 .metric-label {
     color: var(--text-secondary);
     font-weight: 500;
+    text-align: center;
 }
 
 .case-card h3 {
@@ -3893,19 +3905,7 @@ section {
     opacity: 1;
 }
 
-/* 2. MOUSE TRAIL CANVAS */
-#trail-canvas {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    pointer-events: none;
-    z-index: 10001;
-}
-
-/* Hide default cursor site-wide — custom cursor drawn on canvas */
-html, body, * {
-    cursor: none !important;
-}
+/* Mouse trail removed */
 
 /* 3. PAGE TRANSITION OVERLAY */
 .page-transition-overlay {
@@ -4311,4 +4311,91 @@ section + section::before {
         align-items: center;
         justify-content: center;
     }
+}
+
+
+/* ============================================================
+   HERO RIBBON BANNER
+   Full page width, flat rectangle, scrolling "Fluxinity" text
+   Sits directly below the navbar, above the hero section
+   ============================================================ */
+.hero-ribbon {
+    width: 100%;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(8,145,178,0.12), rgba(103,232,249,0.06));
+    border-top: 1.5px solid rgba(103,232,249,0.25);
+    border-bottom: 1.5px solid rgba(103,232,249,0.25);
+    padding: 12px 0;
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 0 40px rgba(103,232,249,0.08);
+}
+
+.ribbon-track {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    width: max-content;
+    animation: ribbonScroll 18s linear infinite;
+    will-change: transform;
+}
+
+.ribbon-track span {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0 2.5rem;
+    white-space: nowrap;
+    position: relative;
+}
+
+/* Alternate "Fluxinity" cyan, "Web" white */
+.ribbon-track span:nth-child(odd) {
+    color: #67e8f9;
+    text-shadow: 0 0 18px rgba(103,232,249,0.45);
+}
+.ribbon-track span:nth-child(even) {
+    color: rgba(248,250,252,0.55);
+}
+
+/* Dot separator between items */
+.ribbon-track span:not(:last-child)::after {
+    content: '·';
+    position: absolute;
+    right: 0;
+    color: rgba(103,232,249,0.3);
+    font-size: 1.4rem;
+    transform: translateX(50%);
+}
+
+@keyframes ribbonScroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* Pause on hover */
+.hero-ribbon:hover .ribbon-track {
+    animation-play-state: paused;
+}
+
+/* Fade edges */
+.hero-ribbon::before,
+.hero-ribbon::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 80px;
+    z-index: 2;
+    pointer-events: none;
+}
+.hero-ribbon::before {
+    left: 0;
+    background: linear-gradient(to right, #020917, transparent);
+}
+.hero-ribbon::after {
+    right: 0;
+    background: linear-gradient(to left, #020917, transparent);
 }
