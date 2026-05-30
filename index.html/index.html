@@ -30,6 +30,90 @@
     </div>
     <!-- Particle background -->
     <canvas id="particle-canvas" aria-hidden="true"></canvas>
+    <!-- Mountain scene background -->
+    <div class="mountain-bg" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" width="100%" height="100%">
+            <!-- Sky gradient -->
+            <defs>
+                <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%"   stop-color="#1a0a0a" stop-opacity="1"/>
+                    <stop offset="40%"  stop-color="#2d1a0e" stop-opacity="1"/>
+                    <stop offset="100%" stop-color="#0f172a" stop-opacity="1"/>
+                </linearGradient>
+                <linearGradient id="sunGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#e8c4a0" stop-opacity="0.9"/>
+                    <stop offset="100%" stop-color="#c97d4e" stop-opacity="0.4"/>
+                </linearGradient>
+                <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%"   stop-color="#e8c4a0" stop-opacity="0.35"/>
+                    <stop offset="100%" stop-color="#c97d4e" stop-opacity="0"/>
+                </radialGradient>
+                <linearGradient id="mtn1" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#8fa8b8" stop-opacity="0.7"/>
+                    <stop offset="100%" stop-color="#3d5a6e" stop-opacity="0.5"/>
+                </linearGradient>
+                <linearGradient id="mtn2" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#5a7a8a" stop-opacity="0.6"/>
+                    <stop offset="100%" stop-color="#2a4050" stop-opacity="0.5"/>
+                </linearGradient>
+                <linearGradient id="mtn3" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#3a5060" stop-opacity="0.7"/>
+                    <stop offset="100%" stop-color="#1a2a35" stop-opacity="0.8"/>
+                </linearGradient>
+                <linearGradient id="rockGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#5a3020" stop-opacity="0.9"/>
+                    <stop offset="100%" stop-color="#1a0a05" stop-opacity="1"/>
+                </linearGradient>
+                <linearGradient id="riverGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#4a8fa8" stop-opacity="0.6"/>
+                    <stop offset="100%" stop-color="#2a6a88" stop-opacity="0.4"/>
+                </linearGradient>
+            </defs>
+            <!-- Sky -->
+            <rect width="1440" height="900" fill="url(#skyGrad)"/>
+            <!-- Sun glow halo -->
+            <ellipse cx="480" cy="280" rx="180" ry="180" fill="url(#sunGlow)"/>
+            <!-- Sun -->
+            <circle cx="480" cy="300" r="80" fill="url(#sunGrad)" opacity="0.55"/>
+            <!-- Far mountains (lightest) -->
+            <polygon points="0,520 120,280 240,420 360,220 500,380 620,200 720,340 840,180 960,320 1080,240 1200,360 1320,260 1440,380 1440,900 0,900" fill="url(#mtn1)"/>
+            <!-- Mid mountains -->
+            <polygon points="0,600 100,380 220,500 340,320 460,460 560,300 680,440 800,280 920,420 1040,340 1160,480 1280,360 1440,500 1440,900 0,900" fill="url(#mtn2)"/>
+            <!-- River/lake in valley -->
+            <ellipse cx="580" cy="680" rx="120" ry="22" fill="url(#riverGrad)" opacity="0.7"/>
+            <path d="M520,680 Q560,660 620,675 Q660,685 700,670" stroke="#4a8fa8" stroke-width="6" fill="none" opacity="0.4"/>
+            <!-- Near dark mountains -->
+            <polygon points="0,700 80,500 180,620 280,460 400,580 500,420 600,560 700,480 800,600 900,500 1000,640 1100,520 1200,660 1300,560 1440,680 1440,900 0,900" fill="url(#mtn3)"/>
+            <!-- Rocky cliff (right side) -->
+            <polygon points="820,900 860,580 900,540 940,560 980,520 1020,560 1060,600 1100,640 1140,700 1160,900" fill="url(#rockGrad)"/>
+            <!-- Rock face highlights -->
+            <polygon points="860,580 900,540 920,600 880,640" fill="#7a4030" opacity="0.4"/>
+            <polygon points="940,560 980,520 1000,580 960,610" fill="#6a3525" opacity="0.3"/>
+            <!-- Silhouette figure on cliff -->
+            <g transform="translate(970, 490)" opacity="0.95">
+                <!-- Body -->
+                <rect x="-5" y="-40" width="10" height="28" rx="3" fill="#0f0a08"/>
+                <!-- Head -->
+                <circle cx="0" cy="-46" r="7" fill="#0f0a08"/>
+                <!-- Backpack -->
+                <rect x="4" y="-38" width="9" height="18" rx="3" fill="#1a0f0a"/>
+                <!-- Legs -->
+                <rect x="-6" y="-12" width="5" height="18" rx="2" fill="#0f0a08"/>
+                <rect x="1" y="-12" width="5" height="18" rx="2" fill="#0f0a08"/>
+                <!-- Arms -->
+                <rect x="-12" y="-36" width="5" height="14" rx="2" fill="#0f0a08" transform="rotate(-10,-12,-36)"/>
+                <rect x="7" y="-36" width="5" height="14" rx="2" fill="#0f0a08" transform="rotate(5,7,-36)"/>
+            </g>
+            <!-- Ground/foreground dark layer -->
+            <polygon points="0,820 200,760 400,800 600,750 800,790 1000,740 1200,780 1440,750 1440,900 0,900" fill="#0a0604" opacity="0.9"/>
+            <!-- Clouds -->
+            <ellipse cx="200" cy="180" rx="90" ry="28" fill="#c8a080" opacity="0.18"/>
+            <ellipse cx="280" cy="170" rx="60" ry="20" fill="#c8a080" opacity="0.14"/>
+            <ellipse cx="1100" cy="220" rx="100" ry="30" fill="#c8a080" opacity="0.15"/>
+            <ellipse cx="1200" cy="210" rx="70" ry="22" fill="#c8a080" opacity="0.12"/>
+            <ellipse cx="1300" cy="240" rx="80" ry="24" fill="#c8a080" opacity="0.1"/>
+        </svg>
+    </div>
     <!-- Mouse trail removed -->
     <!-- Page transition overlay -->
     <div class="page-transition-overlay" id="pageTransitionOverlay"></div>
@@ -52,15 +136,15 @@
         <div class="nav-container">
             <div class="nav-brand">
                 <div class="logo-box">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 40" width="220" height="40" class="logo-img">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190 40" width="190" height="40" class="logo-img">
                         <defs>
                             <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="0%">
                                 <stop offset="0%" style="stop-color:#67e8f9;stop-opacity:1" />
                                 <stop offset="100%" style="stop-color:#0891b2;stop-opacity:1" />
                             </linearGradient>
                         </defs>
-                        <text x="10" y="28" font-family="Poppins, sans-serif" font-size="18" font-weight="700" fill="#f8fafc">Flutter</text>
-                        <text x="108" y="28" font-family="Poppins, sans-serif" font-size="18" font-weight="700" fill="url(#logoGradient)">Web</text>
+                        <text x="8" y="29" font-family="Poppins, sans-serif" font-size="22" font-weight="700" fill="#f8fafc">Flutter</text>
+                        <text x="112" y="29" font-family="Poppins, sans-serif" font-size="22" font-weight="700" fill="url(#logoGradient)">Web</text>
                     </svg>
                 </div>
             </div>
@@ -139,7 +223,147 @@
                 </div>
             </div>
             <div class="hero-visual">
-                <!-- cube removed -->
+                <div class="hero-graphic">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 420" width="100%" height="100%" class="hero-graphic-svg">
+                        <defs>
+                            <linearGradient id="hgSky" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%"   stop-color="#1a0808"/>
+                                <stop offset="45%"  stop-color="#8b3a1a"/>
+                                <stop offset="100%" stop-color="#0f172a"/>
+                            </linearGradient>
+                            <radialGradient id="hgSun" cx="42%" cy="38%" r="18%">
+                                <stop offset="0%"   stop-color="#f5d9b0" stop-opacity="1"/>
+                                <stop offset="40%"  stop-color="#e8a060" stop-opacity="0.7"/>
+                                <stop offset="100%" stop-color="#c97d4e" stop-opacity="0"/>
+                            </radialGradient>
+                            <linearGradient id="hgMtn1" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#9ab0c0"/>
+                                <stop offset="100%" stop-color="#3d5a6e" stop-opacity="0.6"/>
+                            </linearGradient>
+                            <linearGradient id="hgMtn2" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#6a8a9a"/>
+                                <stop offset="100%" stop-color="#253545" stop-opacity="0.8"/>
+                            </linearGradient>
+                            <linearGradient id="hgMtn3" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#3a5060"/>
+                                <stop offset="100%" stop-color="#111e28"/>
+                            </linearGradient>
+                            <linearGradient id="hgRock" x1="20%" y1="0%" x2="80%" y2="100%">
+                                <stop offset="0%"   stop-color="#6b3520"/>
+                                <stop offset="50%"  stop-color="#3d1e10"/>
+                                <stop offset="100%" stop-color="#0f0805"/>
+                            </linearGradient>
+                            <linearGradient id="hgRockFace" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%"   stop-color="#8a4528"/>
+                                <stop offset="100%" stop-color="#2a1008"/>
+                            </linearGradient>
+                            <linearGradient id="hgRiver" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%"   stop-color="#3a7a9a" stop-opacity="0.3"/>
+                                <stop offset="50%"  stop-color="#5aaac8" stop-opacity="0.7"/>
+                                <stop offset="100%" stop-color="#3a7a9a" stop-opacity="0.3"/>
+                            </linearGradient>
+                            <linearGradient id="hgFg" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#1a0e08"/>
+                                <stop offset="100%" stop-color="#050302"/>
+                            </linearGradient>
+                            <filter id="hgGlow">
+                                <feGaussianBlur stdDeviation="6" result="blur"/>
+                                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                            </filter>
+                            <filter id="hgSoftBlur">
+                                <feGaussianBlur stdDeviation="2"/>
+                            </filter>
+                            <clipPath id="hgClip">
+                                <rect width="520" height="420" rx="20"/>
+                            </clipPath>
+                        </defs>
+
+                        <g clip-path="url(#hgClip)">
+                            <!-- Sky -->
+                            <rect width="520" height="420" fill="url(#hgSky)"/>
+
+                            <!-- Sun glow -->
+                            <circle cx="218" cy="158" r="90" fill="url(#hgSun)" opacity="0.9"/>
+                            <!-- Sun disc -->
+                            <circle cx="218" cy="162" r="38" fill="#f0d0a0" opacity="0.85"/>
+                            <!-- Sun inner bright -->
+                            <circle cx="218" cy="162" r="22" fill="#faecd0" opacity="0.95"/>
+
+                            <!-- Clouds -->
+                            <ellipse cx="80"  cy="90"  rx="55" ry="16" fill="#c8a070" opacity="0.22"/>
+                            <ellipse cx="130" cy="82"  rx="38" ry="12" fill="#c8a070" opacity="0.18"/>
+                            <ellipse cx="400" cy="100" rx="60" ry="18" fill="#c8a070" opacity="0.18"/>
+                            <ellipse cx="460" cy="92"  rx="42" ry="13" fill="#c8a070" opacity="0.14"/>
+                            <ellipse cx="350" cy="115" rx="35" ry="10" fill="#c8a070" opacity="0.12"/>
+
+                            <!-- Far mountains (lightest, most distant) -->
+                            <polygon points="0,260 60,140 120,200 180,110 250,190 310,100 370,170 430,90 490,150 520,120 520,300 0,300"
+                                     fill="url(#hgMtn1)" opacity="0.75"/>
+                            <!-- Snow caps far -->
+                            <polygon points="180,110 200,130 160,135" fill="#dce8f0" opacity="0.6"/>
+                            <polygon points="310,100 330,122 290,126" fill="#dce8f0" opacity="0.55"/>
+                            <polygon points="430,90  450,114 410,118" fill="#dce8f0" opacity="0.5"/>
+
+                            <!-- Mid mountains -->
+                            <polygon points="0,320 50,200 110,270 170,170 240,250 300,160 360,230 420,150 480,210 520,180 520,380 0,380"
+                                     fill="url(#hgMtn2)" opacity="0.8"/>
+                            <!-- Snow caps mid -->
+                            <polygon points="170,170 192,196 148,200" fill="#c8d8e4" opacity="0.5"/>
+                            <polygon points="300,160 322,188 278,192" fill="#c8d8e4" opacity="0.45"/>
+
+                            <!-- Valley river/lake -->
+                            <ellipse cx="240" cy="340" rx="80" ry="14" fill="url(#hgRiver)" opacity="0.85"/>
+                            <path d="M180,342 Q220,330 260,338 Q290,344 320,335"
+                                  stroke="#5aaac8" stroke-width="3" fill="none" opacity="0.5"/>
+
+                            <!-- Near dark mountains -->
+                            <polygon points="0,380 40,280 90,340 140,260 200,320 260,240 320,300 380,250 440,310 490,270 520,300 520,420 0,420"
+                                     fill="url(#hgMtn3)" opacity="0.9"/>
+
+                            <!-- Rocky cliff (right) -->
+                            <polygon points="310,420 340,270 365,248 390,258 415,238 440,255 462,278 480,310 500,360 520,380 520,420"
+                                     fill="url(#hgRock)"/>
+                            <!-- Cliff face highlights -->
+                            <polygon points="340,270 365,248 375,290 352,318" fill="url(#hgRockFace)" opacity="0.55"/>
+                            <polygon points="390,258 415,238 422,272 398,285" fill="#7a4030" opacity="0.4"/>
+                            <polygon points="415,238 440,255 445,285 420,295" fill="#5a2e18" opacity="0.35"/>
+                            <!-- Cliff edge shadow -->
+                            <polygon points="310,420 340,270 355,280 330,420" fill="#0a0503" opacity="0.5"/>
+
+                            <!-- Silhouette figure on cliff peak -->
+                            <g transform="translate(412,218)">
+                                <!-- Legs -->
+                                <rect x="-5" y="18"  width="4"  height="16" rx="2" fill="#0a0503"/>
+                                <rect x="1"  y="18"  width="4"  height="16" rx="2" fill="#0a0503"/>
+                                <!-- Body -->
+                                <rect x="-6" y="-4"  width="12" height="22" rx="3" fill="#0a0503"/>
+                                <!-- Jacket highlight -->
+                                <rect x="-5" y="-3"  width="5"  height="20" rx="2" fill="#2a1008" opacity="0.6"/>
+                                <!-- Head -->
+                                <circle cx="0" cy="-10" r="6.5" fill="#0a0503"/>
+                                <!-- Backpack -->
+                                <rect x="5"  y="-2"  width="8"  height="16" rx="3" fill="#1a0a05"/>
+                                <rect x="5"  y="2"   width="8"  height="3"  rx="1" fill="#2a1208" opacity="0.7"/>
+                                <!-- Left arm -->
+                                <rect x="-12" y="-2" width="5"  height="12" rx="2" fill="#0a0503" transform="rotate(-8,-12,-2)"/>
+                                <!-- Right arm -->
+                                <rect x="7"   y="-2" width="5"  height="12" rx="2" fill="#0a0503" transform="rotate(5,7,-2)"/>
+                            </g>
+
+                            <!-- Foreground dark ground -->
+                            <polygon points="0,400 80,375 160,390 240,370 320,385 400,368 480,382 520,372 520,420 0,420"
+                                     fill="url(#hgFg)"/>
+
+                            <!-- Atmospheric haze layers -->
+                            <rect x="0" y="200" width="520" height="60" fill="#8b3a1a" opacity="0.06"/>
+                            <rect x="0" y="280" width="520" height="40" fill="#0f172a" opacity="0.12"/>
+
+                            <!-- Border glow -->
+                            <rect width="520" height="420" rx="20" fill="none"
+                                  stroke="rgba(103,232,249,0.25)" stroke-width="1.5"/>
+                        </g>
+                    </svg>
+                </div>
             </div>
         </div>
     </section>
